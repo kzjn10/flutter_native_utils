@@ -3,7 +3,7 @@
 @implementation FlutterNativeUtilsPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
   FlutterMethodChannel* channel = [FlutterMethodChannel
-      methodChannelWithName:@"flutter_native_utils"
+      methodChannelWithName:@"io.github.anhndt_flutter_native_utils"
             binaryMessenger:[registrar messenger]];
   FlutterNativeUtilsPlugin* instance = [[FlutterNativeUtilsPlugin alloc] init];
   [registrar addMethodCallDelegate:instance channel:channel];
