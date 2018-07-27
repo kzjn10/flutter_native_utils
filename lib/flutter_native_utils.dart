@@ -23,11 +23,29 @@ class FlutterNativeUtils {
     return version;
   }
 
-  static Future<Null> showToast({@required String msg, Toast toastLength, ToastGravity gravity}) async {
+  static Future<Null> showToast({@required String msg, String backgroundColor, String textColor, bool isFullWidth, Toast toastLength, ToastGravity gravity}) async {
+
+    String toast = "short";
+    if(toastLength == Toast.LENGTH_LONG) {
+      toast = "long";
+    }
+
+    String gravityToast = "bottom";
+    if(gravity == ToastGravity.TOP) {
+      gravityToast = "top";
+    } else if(gravity == ToastGravity.CENTER) {
+      gravityToast = "center";
+    } else {
+      gravityToast = "bottom";
+    }
+
     final Map<String, dynamic> params = <String, dynamic>{
       'msg': msg,
-      'length': toastLength,
-      'gravity': gravity,
+      'backgroundColor': backgroundColor ?? '#84bd00',
+      'textColor': textColor ?? '#ffffff',
+      'length': toast,
+      'isFullWidth': isFullWidth ?? 'false' ? 'true' : 'false',
+      'gravity':gravityToast,
     };
 
     await _channel.invokeMethod('showToast', params);

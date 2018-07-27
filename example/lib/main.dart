@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
 
    showToast()  {
     try {
-        FlutterNativeUtils.showToast(msg: 'Hello');
+        FlutterNativeUtils.showToast(msg: 'Heddllo',backgroundColor: "#C70039", gravity: ToastGravity.BOTTOM, isFullWidth: false, textColor: "#581845", toastLength: Toast.LENGTH_SHORT);
     } on PlatformException {
       print('Failed to get platform version.');
     }
