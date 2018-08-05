@@ -24,31 +24,41 @@ class FlutterNativeUtils {
   }
 
   static Future<Null> showToast({@required String msg, String backgroundColor, String textColor, bool isFullWidth, Toast toastLength, ToastGravity gravity}) async {
+    try {
+      String toast = "short";
+      if (toastLength != null && toastLength == Toast.LENGTH_LONG) {
+        toast = "long";
+      }
 
-    String toast = "short";
-    if(toastLength == Toast.LENGTH_LONG) {
-      toast = "long";
+      String gravityToast = "bottom";
+      if (gravity != null) {
+        if (gravity == ToastGravity.TOP) {
+          gravityToast = "top";
+        } else if (gravity == ToastGravity.CENTER) {
+          gravityToast = "center";
+        } else {
+          gravityToast = "bottom";
+        }
+      }
+
+      String fullWidth = 'false';
+      if (isFullWidth != null) {
+        fullWidth = 'true';
+      }
+
+      final Map<String, dynamic> params = <String, dynamic>{
+        'msg': msg,
+        'backgroundColor': backgroundColor ?? '#84bd00',
+        'textColor': textColor ?? '#ffffff',
+        'length': toast,
+        'time': 1,
+        'isFullWidth': fullWidth,
+        'gravity': gravityToast,
+      };
+
+      await _channel.invokeMethod('showToast', params);
+    } catch (Exception) {
+      print('adasdasdasdas');
     }
-
-    String gravityToast = "bottom";
-    if(gravity == ToastGravity.TOP) {
-      gravityToast = "top";
-    } else if(gravity == ToastGravity.CENTER) {
-      gravityToast = "center";
-    } else {
-      gravityToast = "bottom";
-    }
-
-    final Map<String, dynamic> params = <String, dynamic>{
-      'msg': msg,
-      'backgroundColor': backgroundColor ?? '#84bd00',
-      'textColor': textColor ?? '#ffffff',
-      'length': toast,
-      'time': 1,
-      'isFullWidth': isFullWidth ?? 'false' ? 'true' : 'false',
-      'gravity':gravityToast,
-    };
-
-    await _channel.invokeMethod('showToast', params);
   }
 }

@@ -29,6 +29,12 @@
 
         //-------
 
+        UIApplication.shared.keyWindow?.rootViewController?.view.makeToast(message:"Con heo khiem",
+        backgroundColor: "#84bd00",
+        textColor: "#ffffff",
+        duration: 1.0,
+        fullWidth: true,
+        position: HRToastPositionDefault as AnyObject)
 
 
         //----------
